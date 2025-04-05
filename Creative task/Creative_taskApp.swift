@@ -11,7 +11,7 @@ import SwiftUI
 struct Creative_taskApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GroceryListView()
         }
     }
 }
