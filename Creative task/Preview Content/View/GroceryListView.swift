@@ -61,9 +61,12 @@ struct GroceryListView: View {
                 ForEach(items.indices, id: \.self) { index in
                     
                     //Actual name of the item
-                    Text(items[index].name)
-                    Text()
-                    
+                    HStack{
+                        Text(items[index].name)
+                        Spacer()
+                        Text((items[index].category.rawValue))
+                        
+                    }
                     //Button to delete
                     Button {
                                         items.remove(at: index)
