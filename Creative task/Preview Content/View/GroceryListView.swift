@@ -30,14 +30,26 @@ struct GroceryListView: View {
 
             //List to show grocery items
             List {
-                ForEach(names, id: \.self) { name in
-                    Text(name)
+                ForEach(names.indices, id: \.self) { index in
+                    
+                    //Actual name of the item
+                    Text(names[index])
+                    
+                    //Button to delete
+                    Button {
+                                        names.remove(at: index)
+                                            } label: {
+                                                Image(systemName: "trash")
+                                            }
                 }
-                .onDelete(perform: deleteItems) 
+                //Adds in the delete function
+                .onDelete(perform: deleteItems)
             }
         }
         .padding()
     }
+    
+    //This is the function that deletes the item from the names array
     func deleteItems(at offsets: IndexSet) {
         names.remove(atOffsets: offsets)
     }
