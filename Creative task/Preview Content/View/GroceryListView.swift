@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct GroceryListView: View {
+    
+    //New array of all names
     @State private var names: [String] = []
+    
+    //A changing text value that can assist user input to the name array
     @State private var newName: String = ""
+    
+    //
+    @State var selectedOutcomeFilter: Outcome = .undetermined
+    
+    
+    @State var currentOutcome: Outcome = .undetermined
 
     var body: some View {
         VStack {
@@ -19,10 +29,13 @@ struct GroceryListView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
-            //To add items when finished adding text
+            //Add items when finished adding text
             Button("Add") {
+                
                 //Only allow to add when there are text in the textfield
                 if !newName.isEmpty {
+                    
+                    //Add newName text into the array of names
                     names.append(newName)
                     newName = ""
                 }
