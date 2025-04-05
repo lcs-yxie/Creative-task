@@ -46,7 +46,7 @@ struct GroceryListView: View {
                     }
                 }
             }
-
+        
             // Picker to choose category for the added item
             Picker("Select a category", selection: $currentCategories) {
                 Text("Pick one").tag(Categories.undetermined)
@@ -56,34 +56,57 @@ struct GroceryListView: View {
             .pickerStyle(MenuPickerStyle())
             .padding()
             
+            
+            //Picking a specific category to filter
+            Picker("Filtering on", selection: $selectedCategoriesFilter) {
+                Text("All results").tag(Categories.undetermined)
+                Text("Fruit").tag(Categories.fruit)
+                Text("Meat").tag(Categories.meat)
+            }
+            .padding()
+
+            
             //List to show grocery items
             List {
-                ForEach(items.indices, id: \.self) { index in
+                
+                let filteredList = filtering(
+                    originalList: items,
+                    on: selectedCategoriesFilter
+                )
+                ForEach(filteredList) { item in
                     
                     //Actual name of the item
                     HStack{
-                        Text(items[index].name)
+                        Text(item.name)
                         Spacer()
-                        Text((items[index].category.rawValue))
+                        Text((item.category.rawValue))
                         
                     }
                     //Button to delete
                     Button {
-                                        items.remove(at: index)
+                        deleteItem(item)
                                             } label: {
                                                 Image(systemName: "trash")
                                             }
                 }
                 //Adds in the delete function
-                .onDelete(perform: deleteItems)
             }
         }
         .padding()
     }
     
     //This is the function that deletes the item from the names array
-    func deleteItems(at offsets: IndexSet) {
-        items.remove(atOffsets: offsets)
+    func deleteItem(_ itemToDelete: GroceryItem) {
+        // Go through every item in the list
+        for index in 0..<items.count {
+            // If we find a match
+            if items[index].id == itemToDelete.id {
+                // Remove it
+                items.remove(at: index)
+                // Stop the loop, we're done
+                break
+            }
+        }
     }
 }
 
