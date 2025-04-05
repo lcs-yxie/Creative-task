@@ -47,7 +47,7 @@ struct GroceryListView: View {
                 }
             }
 
-            // Picker to choose category
+            // Picker to choose category for the added item
             Picker("Select a category", selection: $currentCategories) {
                 Text("Pick one").tag(Categories.undetermined)
                 Text("Fruit").tag(Categories.fruit)
