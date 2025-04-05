@@ -10,16 +10,15 @@ import SwiftUI
 struct GroceryListView: View {
     
     //New array of all names
-    @State private var names: [String] = []
+    @State private var items: [GroceryItem] = []
     
     //A changing text value that can assist user input to the name array
     @State private var newName: String = ""
     
-    //
-    @State var selectedOutcomeFilter: Outcome = .undetermined
+    //Setting the unselected category as undetermined
+    @State var selectedCategoriesFilter: Categories = .undetermined
     
-    
-    @State var currentOutcome: Outcome = .undetermined
+    @State var currentCategories: Categories = .undetermined
 
     var body: some View {
         VStack {
@@ -32,25 +31,42 @@ struct GroceryListView: View {
             //Add items when finished adding text
             Button("Add") {
                 
-                //Only allow to add when there are text in the textfield
-                if !newName.isEmpty {
+                // Make sure the name is not empty
+                if newName != "" {
                     
-                    //Add newName text into the array of names
-                    names.append(newName)
-                    newName = ""
+                    // Make sure the user picked a real category
+                    if currentCategories != .undetermined {
+                        // Add the item with its name and category
+                        let newItem = GroceryItem(name: newName, category: currentCategories)
+                        items.append(newItem)
+                        
+                        // Clear the text field and reset category
+                        newName = ""
+                        currentCategories = .undetermined
+                    }
                 }
             }
 
+            // Picker to choose category
+            Picker("Select a category", selection: $currentCategories) {
+                Text("Pick one").tag(Categories.undetermined)
+                Text("Fruit").tag(Categories.fruit)
+                Text("Meat").tag(Categories.meat)
+            }
+            .pickerStyle(MenuPickerStyle())
+            .padding()
+            
             //List to show grocery items
             List {
-                ForEach(names.indices, id: \.self) { index in
+                ForEach(items.indices, id: \.self) { index in
                     
                     //Actual name of the item
-                    Text(names[index])
+                    Text(items[index].name)
+                    Text()
                     
                     //Button to delete
                     Button {
-                                        names.remove(at: index)
+                                        items.remove(at: index)
                                             } label: {
                                                 Image(systemName: "trash")
                                             }
@@ -64,7 +80,7 @@ struct GroceryListView: View {
     
     //This is the function that deletes the item from the names array
     func deleteItems(at offsets: IndexSet) {
-        names.remove(atOffsets: offsets)
+        items.remove(atOffsets: offsets)
     }
 }
 

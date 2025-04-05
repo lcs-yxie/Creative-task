@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum Categories: String {
     case undetermined = " "
@@ -18,4 +19,6 @@ enum Categories: String {
     case snack = "Snack"
     case beverage = "Drink"
     case other = "Other"
+    
+    var id: String { self.rawValue }
 }
