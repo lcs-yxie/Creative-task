@@ -49,9 +49,14 @@ struct GroceryListView: View {
         
             // Picker to choose category for the added item
             Picker("Select a category", selection: $currentCategories) {
-                Text("Pick one").tag(Categories.undetermined)
                 Text("Fruit").tag(Categories.fruit)
                 Text("Meat").tag(Categories.meat)
+                Text("Dairy").tag(Categories.dairy)
+                Text("Grain").tag(Categories.grain)
+                Text("Seafood").tag(Categories.seafood)
+                Text("Snack").tag(Categories.snack)
+                Text("Drink").tag(Categories.drink)
+                Text("Other").tag(Categories.other)
             }
             .pickerStyle(MenuPickerStyle())
             .padding()
@@ -62,6 +67,13 @@ struct GroceryListView: View {
                 Text("All results").tag(Categories.undetermined)
                 Text("Fruit").tag(Categories.fruit)
                 Text("Meat").tag(Categories.meat)
+                Text("Dairy").tag(Categories.dairy)
+                Text("Grain").tag(Categories.grain)
+                Text("Seafood").tag(Categories.seafood)
+                Text("Snack").tag(Categories.snack)
+                Text("Drink").tag(Categories.drink)
+                Text("Other").tag(Categories.other)
+                
             }
             .padding()
 

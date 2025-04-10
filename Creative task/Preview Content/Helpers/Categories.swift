@@ -17,7 +17,7 @@ enum Categories: String {
     case grain = "Grain"
     case seafood = "Seafood"
     case snack = "Snack"
-    case beverage = "Drink"
+    case drink = "Drink"
     case other = "Other"
     
     var id: String { self.rawValue }
