@@ -9,10 +9,10 @@ import SwiftUI
 
 struct GroceryListView: View {
     
-    //New array of all names
+    //Array of all names
     @State private var items: [GroceryItem] = []
     
-    //A changing text value that can assist user input to the name array
+    //A changing text value that can allow user input to the name array
     @State private var newName: String = ""
     
     //Setting the unselected category as undetermined
@@ -34,11 +34,10 @@ struct GroceryListView: View {
                 // Make sure the name is not empty
                 if newName != "" {
                     
-                    // Make sure the user picked a real category
+                    // Make sure the user picked a category
                     if currentCategories != .undetermined {
                         // Add the item with its name and category
-                        let newItem = GroceryItem(name: newName, category: currentCategories)
-                        items.append(newItem)
+                        items.append(GroceryItem(name: newName, category: currentCategories))
                         
                         // Clear the text field and reset category
                         newName = ""
